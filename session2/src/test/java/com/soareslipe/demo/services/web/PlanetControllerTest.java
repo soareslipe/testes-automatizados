@@ -8,8 +8,11 @@ import static com.soareslipe.demo.common.PlanetConstants.ALDERAAN;
 import static com.soareslipe.demo.common.PlanetConstants.INVALID_PLANET;
 import static com.soareslipe.demo.common.PlanetConstants.EMPTY_PLANET;
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,6 +25,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -132,5 +136,21 @@ public class PlanetControllerTest {
 		mockMvc.perform(get("/planets"))
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("$", hasSize(0)));
+	}
+	
+	@Test
+	public void removePlanetShouldReturnNoContentWhenIdExists() throws Exception {
+		mockMvc.perform(delete("/planets/1"))
+		.andExpect(status().isNoContent());
+	}
+	
+	@Test
+	public void removePlanetShouldReturnNotFoundWhenIdDoesNotExists() throws Exception {
+		final Long planetId = 1L;
+		
+		doThrow(new EmptyResultDataAccessException(1)).when(planetService).deletePlanet(planetId);
+		
+		mockMvc.perform(delete("/planets/" + planetId))
+		.andExpect(status().isNotFound());
 	}
 }

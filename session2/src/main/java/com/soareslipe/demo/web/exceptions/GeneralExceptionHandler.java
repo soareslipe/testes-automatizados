@@ -1,6 +1,7 @@
 package com.soareslipe.demo.web.exceptions;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -26,6 +27,11 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleConflict(DataIntegrityViolationException ex) {
 		// TODO Auto-generated method stub
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+	}
+	
+	@ExceptionHandler(IllegalArgumentException.class)
+	protected ResponseEntity<Object> handleBadRequest(IllegalArgumentException ex) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
 	}
 
 }
