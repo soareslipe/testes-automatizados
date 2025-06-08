@@ -1,19 +1,16 @@
 package com.soareslipe.demo.services.web;
 
+import static com.soareslipe.demo.common.PlanetConstants.EMPTY_PLANET;
+import static com.soareslipe.demo.common.PlanetConstants.INVALID_PLANET;
 import static com.soareslipe.demo.common.PlanetConstants.PLANET;
 import static com.soareslipe.demo.common.PlanetConstants.PLANETS;
 import static com.soareslipe.demo.common.PlanetConstants.TATOOINE;
-import static com.soareslipe.demo.common.PlanetConstants.YAVINIV;
-import static com.soareslipe.demo.common.PlanetConstants.ALDERAAN;
-import static com.soareslipe.demo.common.PlanetConstants.INVALID_PLANET;
-import static com.soareslipe.demo.common.PlanetConstants.EMPTY_PLANET;
 import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

@@ -1,11 +1,9 @@
 package com.soareslipe.demo.repositories;
 
+import static com.soareslipe.demo.common.PlanetConstants.EMPTY_PLANET;
 import static com.soareslipe.demo.common.PlanetConstants.INVALID_PLANET;
 import static com.soareslipe.demo.common.PlanetConstants.NEW_PLANET;
-import static com.soareslipe.demo.common.PlanetConstants.EMPTY_PLANET;
 import static com.soareslipe.demo.common.PlanetConstants.TATOOINE;
-import static com.soareslipe.demo.common.PlanetConstants.YAVINIV;
-import static com.soareslipe.demo.common.PlanetConstants.ALDERAAN;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -19,8 +17,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.soareslipe.demo.domain.Planet;

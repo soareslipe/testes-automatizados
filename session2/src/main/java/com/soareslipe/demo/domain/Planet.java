@@ -13,21 +13,22 @@ import jakarta.validation.constraints.NotEmpty;
 @Entity
 @Table(name = "planets")
 public class Planet {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotEmpty
-	@Column(unique = true)
+	@Column(nullable = false, unique = true)
 	private String name;
 	@NotEmpty
 	private String climate;
 	@NotEmpty
 	private String terrain;
-	
-	public Planet() {}
-	
+
+	public Planet() {
+	}
+
 	public Planet(String name, String climate, String terrain) {
 		super();
 		this.name = name;
@@ -92,7 +93,5 @@ public class Planet {
 		return Objects.equals(climate, other.climate) && Objects.equals(id, other.id)
 				&& Objects.equals(name, other.name) && Objects.equals(terrain, other.terrain);
 	}
-	
-	
-	
+
 }
